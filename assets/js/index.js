@@ -69,143 +69,88 @@ sr.reveal(`.home__data, .home__img,
 /* Menu */
 let categories = [{
     id: 1,
-    name: 'Panini',
+    name: 'Maglie',
 },
 {
     id: 2,
-    name: 'Genovesi',
+    name: 'Felpe',
 },
 {
     id: 3,
-    name: 'Pizze',
+    name: 'Sacche',
 },
 {
     id: 4,
-    name: 'Bibite',
+    name: 'Timbro',
 },
 {
     id: 5,
-    name: 'Caffè',
+    name: 'Bigliettino da visita',
 },
 {
     id: 6,
-    name: 'Dolci',
+    name: 'Pantaloni',
 },
 {
     id: 7,
-    name: 'Caramelle',
+    name: 'Calzini',
 },
 ];
 
 // Qua bisogna fare la rischiesta AJAX per ottenere tutti i piatti
 let products = [{
-    name: 'Panino con cotoletta',
+    name: 'Maglia bianca logo',
     category: {
         id: 1,
-        name: "Panini",
+        name: "Maglie",
     },
-    description: 'Pane, cotoletta, insalata, pomodoro, maionese o ketchup',
-    price: 3.00,
-    image: '/assets/img/Paninazo.png',
+    description: 'Maglia bianca con logo sia davanti che dietro',
+    price: 10.00,
+    image: '/assets/img/magliaWhiteFront.png',
     inCart: 0,
 },
 {
-    name: 'Genovese cotto e mozzarella',
+    name: 'Maglia nera logo',
+    category: {
+        id: 1,
+        name: "Maglie",
+    },
+    description: 'Maglia nera con logo sia davanti che dietro',
+    price: 10.00,
+    image: '/assets/img/magliaBlackFront.png',
+    inCart: 0,
+},
+{
+    name: 'Felpa Venezia',
     category: {
         id: 2,
-        name: "Genovesi",
+        name: "Felpe",
     },
-    description: 'Pane, prosciutto cotto, mozzarella',
-    price: 2.00,
-    image: '/assets/img/Paninazo.png',
+    description: 'Felpa bianca Venezia',
+    price: 30.00,
+    image: '/assets/img/graficaVenezia.jpeg',
     inCart: 0,
 },
 {
-    name: 'Pizzetta rotonda',
-    category: {
-        id: 3,
-        name: "Pizze",
-    },
-    description: 'Pizza con mozzarella e pomodoro',
-    price: 1.20,
-    image: '/assets/img/Paninazo.png',
-    inCart: 0,
-},
-{
-    name: 'Genovese porchetta e funghi',
+    name: 'Felpa Las Vegas',
     category: {
         id: 2,
-        name: "Genovesi",
+        name: "Felpe",
     },
-    description: 'Pane, porchetta, funghi',
-    price: 2.00,
-    image: 'assets/img/Paninazo.png',
+    description: 'Felpa bianca Las Vegas',
+    price: 30.00,
+    image: '/assets/img/graficaVenezia.jpeg',
     inCart: 0,
 },
 {
-    name: 'Genovese speck e würstel',
+    name: 'Felpa Egitto',
     category: {
         id: 2,
-        name: "Genovesi",
+        name: "Felpe",
     },
-    description: 'Pane, speck, würstel',
-    price: 2.00,
-    image: 'assets/img/Paninazo.png',
-    inCart: 0,
-},
-{
-    name: 'Acqua frizzante',
-    category: {
-        id: 4,
-        name: "Bibite",
-    },
-    description: 'Acqua con bolle',
-    price: 1.00,
-    image: 'assets/img/Paninazo.png',
-    inCart: 0,
-},
-{
-    name: 'Acqua naturale',
-    category: {
-        id: 4,
-        name: "Bibite",
-    },
-    description: 'Acqua liscia',
-    price: 1.00,
-    image: 'assets/img/Paninazo.png',
-    inCart: 0,
-},
-{
-    name: 'Cappuccino',
-    category: {
-        id: 5,
-        name: "Caffè",
-    },
-    description: 'Cappuccino',
-    price: 1.00,
-    image: 'assets/img/Paninazo.png',
-    inCart: 0,
-},
-{
-    name: 'Biscotto al cioccolato',
-    category: {
-        id: 6,
-        name: "Dolci",
-    },
-    description: 'Biscotto con il cioccolato fondente',
-    price: 2.00,
-    image: 'assets/img/Paninazo.png',
-    inCart: 0,
-},
-{
-    name: 'Goleador alla cocacola',
-    category: {
-        id: 7,
-        name: "Caramelle",
-    },
-    description: 'Caramella alla cocacola',
-    price: 0.10,
-    image: 'assets/img/Paninazo.png',
+    description: 'Felpa bianca Egitto',
+    price: 30.00,
+    image: '/assets/img/graficaVenezia.jpeg',
     inCart: 0,
 },
 ];
@@ -241,7 +186,7 @@ function addMenu(items) {
     });
 }
 
-//if (element.category.id == element.id)
+// if (element.category.id == element.id)
 function addCategories(categories) {
     categories.forEach(element => {
         $(".menu__container").append(
@@ -251,97 +196,3 @@ function addCategories(categories) {
         );
     })
 }
-
-
-/* Shopping cart */
-
-let carts = document.querySelectorAll('.add-cart');
-
-for (let i = 0; i < carts.length; i++) {
-    carts[i].addEventListener('click', () => {
-        cartNumbers(products[i]);
-        totalCost(products[i]);
-    })
-}
-
-function onLoadCartNumbers() {
-    let productNumbers = localStorage.getItem('cartNumbers');
-
-    if (productNumbers) {
-        document.querySelector('.cart-numbers').textContent = productNumbers;
-    }
-}
-
-function cartNumbers(product) {
-    let productNumbers = localStorage.getItem('cartNumbers');
-
-    productNumbers = parseInt(productNumbers);
-
-    if (productNumbers) {
-        localStorage.setItem('cartNumbers', productNumbers + 1);
-        document.querySelector('.cart-numbers').textContent = productNumbers + 1;
-    } else {
-        localStorage.setItem('cartNumbers', 1);
-        document.querySelector('.cart-numbers').textContent = 1;
-    }
-
-    setItem(product);
-}
-
-// function setItem(product) {
-//     let cartItems = localStorage.getItem('productsInCart');
-//     cartItems = JSON.parse(cartItems);
-
-//     if (cartItems != null) {
-//         if (cartItems[product.tag] == undefined) {
-//             cartItems = {
-//                 ...cartItems,
-//                 [product.tag]: product
-//             }
-//         }
-//         cartItems[product.tag].inCart++;
-//     } else {
-//         product.inCart = 1;
-//         cartItems = {
-//             [product.tag]: product
-//         }
-//     }
-
-//     localStorage.setItem("productsInCart", JSON.stringify(cartItems));
-// }
-
-function setItem(product) {
-    let cartItems = localStorage.getItem('productsInCart');
-    cartItems = JSON.parse(cartItems);
-
-    if (cartItems != null) {
-        if (cartItems[product.name] == undefined) {
-            cartItems = {
-                ...cartItems,
-                [product.name]: product
-            }
-        }
-        cartItems[product.name].inCart++;
-    } else {
-        product.inCart = 1;
-        cartItems = {
-            [product.name]: product
-        }
-    }
-
-    localStorage.setItem("productsInCart", JSON.stringify(cartItems));
-}
-
-function totalCost(product) {
-    let cartCost = localStorage.getItem('totalCost');
-
-    if (cartCost != null) {
-        cartCost = parseInt(cartCost);
-        localStorage.setItem("totalCost", cartCost + product.price);
-    } else {
-        localStorage.setItem("totalCost", product.price);
-    }
-
-}
-
-onLoadCartNumbers();
